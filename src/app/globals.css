@@ -1,26 +1,107 @@
 @import "tailwindcss";
 
+@theme {
+  --color-background: var(--bg-primary);
+  --color-foreground: var(--text-primary);
+  --color-primary: var(--accent);
+  --color-surface: var(--bg-surface);
+  --color-border: var(--border-subtle);
+  
+  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Graphite/Ivory Engineering Theme */
+  --bg-primary: #E8E7E3;
+  --bg-surface: #F0EFEB; /* Elevated surface for cards/panels */
+  --bg-surface-alt: #DDDDD9; /* Secondary/inactive surface */
+  
+  --text-primary: #202225;
+  --text-secondary: #555A60;
+  --text-tertiary: #83888D;
+  
+  --accent: #3569D4;
+  --accent-muted: rgba(53, 105, 212, 0.12);
+  
+  --border-subtle: #C4C5C3;
+  --border-strong: #B8B9B7;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Subtle tonal shadows */
+  --shadow-sm: 0 1px 2px rgba(32, 34, 37, 0.04);
+  --shadow-md: 0 3px 8px rgba(32, 34, 37, 0.06);
+  --shadow-lg: 0 8px 24px rgba(32, 34, 37, 0.08);
+  
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px; /* Toned down roundedness */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Global Typography Hierarchy */
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Very subtle technical background / engineering paper vibe */
+.bg-grid-pattern {
+  position: relative;
+}
+
+.bg-grid-pattern::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: 
+    linear-gradient(to right, rgba(32, 34, 37, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(32, 34, 37, 0.07) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center center;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* 3D Floating Banners Keyframes */
+@keyframes banner-float-1 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(-0.5deg);
+  }
+}
+
+@keyframes banner-float-2 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(5px) rotate(0.5deg);
+  }
+}
+
+@keyframes banner-float-3 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(0.4deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .banner-float-anim {
+    animation: none !important;
+  }
 }
